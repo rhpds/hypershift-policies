@@ -1,0 +1,30 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: aws-secret-access-key
+  namespace: rhdp-policies
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: aws-secret-access-key
+      spec:
+        remediationAction: enforce
+        severity: medium
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: aws-secret-access-key
+              namespace: cert-manager
+            data:
+              secret-access-key: |
+                {{hub fromSecret "rhdp-policies" "aws-secret-access-key" "secret-access-key" hub}}
+

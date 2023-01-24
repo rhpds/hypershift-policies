@@ -1,0 +1,11 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: aws-secret-access-key
+  namespace: rhdp-policies
+spec:
+  clusterSelector:
+    matchLabels:
+      vendor: OpenShift
+      type: sandbox

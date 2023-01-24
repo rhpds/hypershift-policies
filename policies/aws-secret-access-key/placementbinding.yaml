@@ -1,0 +1,14 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: aws-secret-access-key
+  namespace: rhdp-policies
+placementRef:
+  apiGroup: apps.open-cluster-management.io
+  kind: PlacementRule
+  name: aws-secret-access-key
+subjects:
+- apiGroup: policy.open-cluster-management.io
+  kind: Policy
+  name: aws-secret-access-key

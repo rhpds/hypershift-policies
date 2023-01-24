@@ -1,0 +1,26 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: kubeadmin-absent
+  namespace: rhdp-policies
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: kubeadmin-absent
+      spec:
+        remediationAction: enforce
+        severity: medium
+        object-templates:
+        - complianceType: mustnothave
+          objectDefinition:
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: kubeadmin
+              namespace: kube-system
