@@ -1,0 +1,14 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: openshift-serverless-installed
+  namespace: rhdp-policies
+placementRef:
+  apiGroup: apps.open-cluster-management.io
+  kind: PlacementRule
+  name: openshift-serverless-installed
+subjects:
+- apiGroup: policy.open-cluster-management.io
+  kind: Policy
+  name: openshift-serverless-installed
