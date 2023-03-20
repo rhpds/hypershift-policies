@@ -9,3 +9,4 @@ spec:
     matchLabels:
       vendor: OpenShift
       type: sandbox
+      deploy-aws-secret-access-key: true
