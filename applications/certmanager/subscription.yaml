@@ -19,7 +19,7 @@ spec:
         installCRDs: true
         extraArgs: ['--dns01-recursive-nameservers=1.1.1.1:53','--dns01-recursive-nameservers-only']
   packageFilter:
-    version: "v1.10.2"
+    version: "v1.12.2"
   placement:
     placementRef:
       kind: PlacementRule
