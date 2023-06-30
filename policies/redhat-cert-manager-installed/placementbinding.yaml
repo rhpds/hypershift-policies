@@ -5,7 +5,7 @@ metadata:
   name: redhat-cert-manager-installed
   namespace: rhdp-policies
 placementRef:
-  apiGroup: apps.open-cluster-management.io
+  apiGroup: cluster.open-cluster-management.io
   kind: Placement
   name: redhat-cert-manager-installed
 subjects:
