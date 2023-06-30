@@ -6,7 +6,7 @@ metadata:
   namespace: rhdp-policies
 placementRef:
   apiGroup: apps.open-cluster-management.io
-  kind: PlacementRule
+  kind: Placement
   name: aws-secret-access-key
 subjects:
 - apiGroup: policy.open-cluster-management.io
