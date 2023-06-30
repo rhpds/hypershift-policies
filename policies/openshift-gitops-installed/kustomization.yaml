@@ -4,5 +4,5 @@ kind: Kustomization
 
 resources:
 - policy.yaml
-- placementrule.yaml
+- placement.yaml
 - placementbinding.yaml
