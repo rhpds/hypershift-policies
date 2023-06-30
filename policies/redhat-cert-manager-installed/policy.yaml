@@ -42,7 +42,7 @@ spec:
               name: openshift-cert-manager-operator
               namespace: cert-manager-operator
             spec:
-              channel: stable
+              channel: stable-v1
               installPlanApproval: Automatic
               name: openshift-cert-manager-operator
               source: redhat-operators
