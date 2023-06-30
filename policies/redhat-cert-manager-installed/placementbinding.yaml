@@ -1,0 +1,14 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: redhat-cert-manager-installed
+  namespace: rhdp-policies
+placementRef:
+  apiGroup: apps.open-cluster-management.io
+  kind: Placement
+  name: redhat-cert-manager-installed
+subjects:
+- apiGroup: policy.open-cluster-management.io
+  kind: Policy
+  name: redhat-cert-manager-installed
