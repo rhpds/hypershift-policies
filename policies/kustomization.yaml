@@ -6,10 +6,10 @@ namespace: hcp-policies
 
 resources:
 - hcp-policyset
-- admin-authorization
 - aws-secret-access-key
-- kubeadmin-absent
-- openshift-gitops-installed
-- openshift-pipelines-installed
-- openshift-serverless-installed
 - redhat-cert-manager-installed
+- openshift-gitops-installed
+#- kubeadmin-absent
+#- openshift-pipelines-installed
+#- openshift-serverless-installed
+# - admin-authorization
