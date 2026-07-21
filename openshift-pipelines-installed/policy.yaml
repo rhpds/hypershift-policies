@@ -1,0 +1,31 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: openshift-pipelines-installed
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1beta1
+      kind: OperatorPolicy
+      metadata:
+        name: openshift-pipelines-installed
+      spec:
+        remediationAction: enforce
+        severity: medium
+        complianceType: musthave
+        subscription:
+          channel: pipelines-1.15
+          installPlanApproval: Automatic
+          name: openshift-pipelines-operator-rh
+          namespace: openshift-operators
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+        upgradeApproval: Automatic
+        removalBehavior:
+          operatorGroups: DeleteIfUnused
+          subscriptions: Delete
+          clusterServiceVersions: Delete
+          customResourceDefinitions: Delete

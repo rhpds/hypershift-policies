@@ -1,0 +1,61 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: redhat-cert-manager-installed
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1beta1
+      kind: OperatorPolicy
+      metadata:
+        name: redhat-cert-manager-installed
+      spec:
+        remediationAction: enforce
+        severity: medium
+        complianceType: musthave
+        subscription:
+          channel: stable-v1
+          installPlanApproval: Automatic
+          name: openshift-cert-manager-operator
+          namespace: cert-manager-operator
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+        operatorGroup:
+          name: openshift-cert-manager-operator
+          targetNamespaces:
+          - cert-manager-operator
+        upgradeApproval: Automatic
+        removalBehavior:
+          operatorGroups: Delete
+          subscriptions: Delete
+          clusterServiceVersions: Delete
+          customResourceDefinitions: Delete
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: redhat-cert-manager-operand
+      spec:
+        remediationAction: enforce
+        pruneObjectBehavior: DeleteIfCreated
+        severity: medium
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: operator.openshift.io/v1alpha1
+            kind: CertManager
+            metadata:
+              name: cluster
+            spec:
+              logLevel: Normal
+              managementState: Managed
+              observedConfig: null
+              operatorLogLevel: Normal
+              unsupportedConfigOverrides:
+                controller:
+                  args:
+                  - "--dns01-recursive-nameservers=1.1.1.1:53"
+                  - "--dns01-recursive-nameservers-only"
