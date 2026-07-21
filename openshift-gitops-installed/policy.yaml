@@ -8,6 +8,22 @@ spec:
   disabled: false
   policy-templates:
   - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: gitops-operator-namespace
+      spec:
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: openshift-gitops-operator
+        pruneObjectBehavior: DeleteIfCreated
+        remediationAction: enforce
+        severity: high
+  - objectDefinition:
       apiVersion: policy.open-cluster-management.io/v1beta1
       kind: OperatorPolicy
       metadata:
@@ -17,7 +33,7 @@ spec:
         severity: medium
         complianceType: musthave
         subscription:
-          channel: gitops-1.13
+          channel: gitops-1.21
           installPlanApproval: Automatic
           name: openshift-gitops-operator
           namespace: openshift-operators
