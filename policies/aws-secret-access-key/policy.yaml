@@ -25,5 +25,5 @@ spec:
               namespace: cert-manager
             data:
               secret-access-key: |
-                {{hub fromSecret .metadata.namespace "aws-secret-access-key" "secret-access-key" hub}}
+                {{hub fromSecret "hcp-policies" "aws-secret-access-key" "secret-access-key" hub}}
 

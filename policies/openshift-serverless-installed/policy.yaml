@@ -28,7 +28,6 @@ spec:
           operatorGroups: DeleteIfUnused
           subscriptions: Delete
           clusterServiceVersions: Delete
-          installPlans: Delete
           customResourceDefinitions: Delete
   - objectDefinition:
       apiVersion: policy.open-cluster-management.io/v1
