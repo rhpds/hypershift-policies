@@ -34,9 +34,8 @@ spec:
         complianceType: musthave
         subscription:
           channel: gitops-1.21
-          installPlanApproval: Automatic
           name: openshift-gitops-operator
-          namespace: openshift-operators
+          namespace: openshift-gitops-operator
           source: redhat-operators
           sourceNamespace: openshift-marketplace
         upgradeApproval: Automatic
