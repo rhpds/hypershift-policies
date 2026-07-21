@@ -3,6 +3,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: openshift-gitops-installed
+  namespace: hcp-policies
 spec:
   remediationAction: enforce
   disabled: false
@@ -24,7 +25,7 @@ spec:
         remediationAction: enforce
         severity: high
   - objectDefinition:
-      apiVersion: policy.open-cluster-management.io/v1beta1
+      apiVersion: policy.open-cluster-management.io/v1
       kind: OperatorPolicy
       metadata:
         name: openshift-gitops-installed
