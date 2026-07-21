@@ -9,28 +9,38 @@ spec:
   disabled: false
   policy-templates:
   - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1beta1
+      kind: OperatorPolicy
+      metadata:
+        name: openshift-serverless-installed
+      spec:
+        remediationAction: enforce
+        severity: medium
+        complianceType: musthave
+        subscription:
+          channel: stable
+          installPlanApproval: Automatic
+          name: serverless-operator
+          namespace: openshift-operators
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+        upgradeApproval: Automatic
+        removalBehavior:
+          operatorGroups: DeleteIfUnused
+          subscriptions: Delete
+          clusterServiceVersions: Delete
+          installPlans: Delete
+          customResourceDefinitions: Delete
+  - objectDefinition:
       apiVersion: policy.open-cluster-management.io/v1
       kind: ConfigurationPolicy
       metadata:
-        name: openshift-serverless-installed
+        name: openshift-serverless-operands
       spec:
         remediationAction: enforce
         pruneObjectBehavior: DeleteIfCreated
         severity: medium
         object-templates:
-        - complianceType: musthave
-          objectDefinition:
-            apiVersion: operators.coreos.com/v1alpha1
-            kind: Subscription
-            metadata:
-              name: openshift-serverless-operator
-              namespace: openshift-operators
-            spec:
-              channel: stable
-              installPlanApproval: Automatic
-              name: serverless-operator
-              source: redhat-operators
-              sourceNamespace: openshift-marketplace
         - complianceType: musthave
           objectDefinition:
             apiVersion: v1

@@ -9,25 +9,25 @@ spec:
   disabled: false
   policy-templates:
   - objectDefinition:
-      apiVersion: policy.open-cluster-management.io/v1
-      kind: ConfigurationPolicy
+      apiVersion: policy.open-cluster-management.io/v1beta1
+      kind: OperatorPolicy
       metadata:
         name: openshift-pipelines-installed
       spec:
         remediationAction: enforce
-        pruneObjectBehavior: DeleteIfCreated
         severity: medium
-        object-templates:
-        - complianceType: musthave
-          objectDefinition:
-            apiVersion: operators.coreos.com/v1alpha1
-            kind: Subscription
-            metadata:
-              name: openshift-pipelines
-              namespace: openshift-operators
-            spec:
-              channel: pipelines-1.15
-              installPlanApproval: Automatic
-              name: openshift-pipelines-operator-rh
-              source: redhat-operators
-              sourceNamespace: openshift-marketplace
+        complianceType: musthave
+        subscription:
+          channel: pipelines-1.15
+          installPlanApproval: Automatic
+          name: openshift-pipelines-operator-rh
+          namespace: openshift-operators
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+        upgradeApproval: Automatic
+        removalBehavior:
+          operatorGroups: DeleteIfUnused
+          subscriptions: Delete
+          clusterServiceVersions: Delete
+          installPlans: Delete
+          customResourceDefinitions: Delete

@@ -9,44 +9,42 @@ spec:
   disabled: false
   policy-templates:
   - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1beta1
+      kind: OperatorPolicy
+      metadata:
+        name: redhat-cert-manager-installed
+      spec:
+        remediationAction: enforce
+        severity: medium
+        complianceType: musthave
+        subscription:
+          channel: stable-v1
+          installPlanApproval: Automatic
+          name: openshift-cert-manager-operator
+          namespace: cert-manager-operator
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+        operatorGroup:
+          name: openshift-cert-manager-operator
+          targetNamespaces:
+          - cert-manager-operator
+        upgradeApproval: Automatic
+        removalBehavior:
+          operatorGroups: Delete
+          subscriptions: Delete
+          clusterServiceVersions: Delete
+          installPlans: Delete
+          customResourceDefinitions: Delete
+  - objectDefinition:
       apiVersion: policy.open-cluster-management.io/v1
       kind: ConfigurationPolicy
       metadata:
-        name: redhat-cert-manager-installed
+        name: redhat-cert-manager-operand
       spec:
         remediationAction: enforce
         pruneObjectBehavior: DeleteIfCreated
         severity: medium
         object-templates:
-        - complianceType: musthave
-          objectDefinition:
-            apiVersion: v1
-            kind: Namespace
-            metadata:
-              name: cert-manager-operator
-        - complianceType: musthave
-          objectDefinition:
-            apiVersion: operators.coreos.com/v1
-            kind: OperatorGroup
-            metadata:
-              name: openshift-cert-manager-operator
-              namespace: cert-manager-operator
-            spec:
-              targetNamespaces:
-              - cert-manager-operator
-        - complianceType: musthave
-          objectDefinition:
-            apiVersion: operators.coreos.com/v1alpha1
-            kind: Subscription
-            metadata:
-              name: openshift-cert-manager-operator
-              namespace: cert-manager-operator
-            spec:
-              channel: stable-v1
-              installPlanApproval: Automatic
-              name: openshift-cert-manager-operator
-              source: redhat-operators
-              sourceNamespace: openshift-marketplace
         - complianceType: musthave
           objectDefinition:
             apiVersion: operator.openshift.io/v1alpha1
