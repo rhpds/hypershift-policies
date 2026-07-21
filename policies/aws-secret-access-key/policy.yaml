@@ -3,7 +3,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: aws-secret-access-key
-  namespace: rhdp-policies
+  namespace: hcp-policies
 spec:
   remediationAction: enforce
   disabled: false
@@ -26,5 +26,5 @@ spec:
               namespace: cert-manager
             data:
               secret-access-key: |
-                {{hub fromSecret "rhdp-policies" "aws-secret-access-key" "secret-access-key" hub}}
+                {{hub fromSecret .metadata.namespace "aws-secret-access-key" "secret-access-key" hub}}
 
