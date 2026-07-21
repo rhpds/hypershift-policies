@@ -3,7 +3,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: openshift-pipelines-installed
-  namespace: hcp-policies
 spec:
   remediationAction: enforce
   disabled: false

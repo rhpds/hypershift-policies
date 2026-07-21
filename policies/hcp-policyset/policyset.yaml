@@ -3,7 +3,6 @@ apiVersion: policy.open-cluster-management.io/v1beta1
 kind: PolicySet
 metadata:
   name: hcp-cluster-config
-  namespace: hcp-policies
 spec:
   description: Base configuration policies for HCP managed clusters
   policies:
