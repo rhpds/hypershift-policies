@@ -1,0 +1,46 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: openshift-gitops-installed
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: gitops-operator-namespace
+      spec:
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: openshift-gitops-operator
+        pruneObjectBehavior: DeleteIfCreated
+        remediationAction: enforce
+        severity: high
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: OperatorPolicy
+      metadata:
+        name: openshift-gitops-installed
+      spec:
+        remediationAction: enforce
+        severity: medium
+        complianceType: musthave
+        subscription:
+          channel: gitops-1.21
+          name: openshift-gitops-operator
+          namespace: openshift-gitops-operator
+          source: redhat-operators
+          sourceNamespace: openshift-marketplace
+        upgradeApproval: Automatic
+        removalBehavior:
+          operatorGroups: DeleteIfUnused
+          subscriptions: Delete
+          clusterServiceVersions: Delete
+          customResourceDefinitions: Delete

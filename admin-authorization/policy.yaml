@@ -3,7 +3,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: admin-authorization
-  namespace: rhdp-policies
 spec:
   remediationAction: enforce
   disabled: false

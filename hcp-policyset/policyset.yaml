@@ -1,0 +1,15 @@
+---
+apiVersion: policy.open-cluster-management.io/v1beta1
+kind: PolicySet
+metadata:
+  name: hcp-cluster-config
+spec:
+  description: Base configuration policies for HCP managed clusters
+  policies:
+  - openshift-pipelines-installed
+  - openshift-gitops-installed
+  - openshift-serverless-installed
+  - redhat-cert-manager-installed
+  - admin-authorization
+  - kubeadmin-absent
+  - aws-secret-access-key
